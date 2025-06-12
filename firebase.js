@@ -1,6 +1,7 @@
 // firebase.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -18,4 +19,21 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-export { database };
+// Initialize Firebase Authentication
+const auth = getAuth(app);
+
+// Sign in the user anonymously
+signInAnonymously(auth)
+    .then(() => {
+        console.log("User signed in anonymously");
+    })
+    .catch((error) => {
+        console.error("Error signing in anonymously:", error);
+    });
+
+export { database, auth };
+
+import { setLogLevel } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+
+// Set Firebase log level to debug
+setLogLevel("debug");
