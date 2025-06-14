@@ -22,10 +22,11 @@ const database = getDatabase(app);
 // Initialize Firebase Authentication
 const auth = getAuth(app);
 
-// Sign in the user anonymously
 signInAnonymously(auth)
     .then(() => {
-        console.log("User signed in anonymously");
+        if (window.location.hostname === "localhost") {
+            console.log("User signed in anonymously");
+        }
     })
     .catch((error) => {
         console.error("Error signing in anonymously:", error);
